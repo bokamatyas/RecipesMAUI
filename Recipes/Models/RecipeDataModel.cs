@@ -20,6 +20,7 @@ namespace Recipes.Models
         
         public List<string>? Instructions { get; set; }
 
+        [NotNull]
         public string? ImageUrl { get; set; }
 
         public RecipeDataModel(string _name, List<string> _ingredients, List<string>? _instructions, string? _imageUrl)
@@ -35,6 +36,9 @@ namespace Recipes.Models
 
         public RecipeDataModel()
         {
+            this.Name = "TEST";
+            this.Ingredients = [];
+            this.ImageUrl = "noimage.png";
         }
     }
 }

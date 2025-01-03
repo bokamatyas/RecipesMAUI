@@ -8,19 +8,16 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Recipes">
 
-    <FlyoutItem Title="Recipes">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Recipes"
             ContentTemplate="{DataTemplate pages:MainPage}"
             Route="MainPage"/>
-    </FlyoutItem>
-    <FlyoutItem Title="New Recipe">
         <ShellContent
             Title="New Recipe"
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="MainPage"/>
-    </FlyoutItem>
-    <FlyoutItem Title="Read Recipe from QR">
+            ContentTemplate="{DataTemplate pages:DataControlPage}"
+            Route="DataControlPage"
+            FlyoutItemIsVisible="False"/>
         <ShellContent
             Title="Read Recipe from QR"
             ContentTemplate="{DataTemplate pages:MainPage}"

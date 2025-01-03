@@ -20,6 +20,8 @@ namespace Recipes
                 });
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<DataControlPage>();
+            builder.Services.AddSingleton<DataControlViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

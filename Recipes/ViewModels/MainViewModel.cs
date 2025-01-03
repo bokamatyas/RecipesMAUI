@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Recipes.Models;
+using Recipes.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,9 @@ namespace Recipes.ViewModels
     {
         [ObservableProperty]
         public List<RecipeDataModel>? recipesData;
+
+        [ObservableProperty]
+        public RecipeDataModel? selectedRecipeData;
 
         [RelayCommand]
         private void Appearing()
@@ -32,9 +36,23 @@ namespace Recipes.ViewModels
         }
 
         [RelayCommand]
-        private void ViewRecipe() 
+        private void NewRecipe()
         {
-
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    DataControlPage.InputRecipeData = new RecipeDataModel();
+                    await Shell.Current.GoToAsync($"//{nameof(DataControlPage)}", true);
+                });
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
         }
     }
 }
