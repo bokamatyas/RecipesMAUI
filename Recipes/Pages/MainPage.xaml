@@ -1,10 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="Recipes.Pages.MainPage">
 
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <ScrollView>
-        
-    </ScrollView>
+        <Grid RowDefinitions=".1*, *" Margin="10">
+            <Label Text="Recipes" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold"/>
+            <Border Grid.Row="1">
+                <CollectionView ItemsSource="{Binding RecipesData}" SelectionMode="None">
+                    <CollectionView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*">
+                                <Border Stroke="Black" Grid.Column="0">
+                                    <Label Text="Name" FontAttributes="Bold" HorizontalOptions="Center" Padding="10"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="0">
 
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.HeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*">
+                                <Label Text="" FontAttributes="Bold" HeightRequest="50" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                                <Button Text="View" Grid.Column="1" FontAttributes="Bold" HorizontalOptions="Center" Command="{Binding ViewRecipeCommand}"/>
+                                <Line X2="1000" Stroke="Black" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
+    </ScrollView>
 </ContentPage>
