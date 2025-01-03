@@ -30,5 +30,81 @@ namespace Recipes.Models
             }
         }
 
+        public static async Task<List<RecipeDataModel>?> GetAllItemsAsync()
+        {
+            try
+            {
+                await Init();
+                if (Database is not null)
+                    return await Database.Table<RecipeDataModel>().ToListAsync();
+                return null;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return null;
+            }
+        }
+
+        public static async Task<RecipeDataModel?> GetItemAsync(int _id)
+        {
+            try
+            {
+                await Init();
+                if (Database is not null)
+                    return await Database.Table<RecipeDataModel>().FirstOrDefaultAsync(m => m.Id == _id);
+                return null;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return null;
+            }
+        }
+
+        public static async Task<int?> SaveItemAsync(RecipeDataModel _recipeData)
+        {
+            try
+            {
+                await Init();
+                if (Database is not null)
+                {
+                    if (_recipeData.Id != 0)
+                        return await Database.UpdateAsync(_recipeData);
+                    return await Database.InsertAsync(_recipeData);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return null;
+            }
+        }
+
+        public static async Task<int?> DeleteItemAsync(RecipeDataModel _recipeData)
+        {
+            try
+            {
+                await Init();
+                if (Database is not null)
+                    return await Database.DeleteAsync(_recipeData);
+                return null;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return null;
+            }
+        }
+
     }
 }
