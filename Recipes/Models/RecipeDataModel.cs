@@ -20,11 +20,14 @@ namespace Recipes.Models
         
         public List<string>? Instructions { get; set; }
 
-        public RecipeDataModel(string _name, List<string> _ingredients, List<string>? _instructions)
+        public string? ImageUrl { get; set; }
+
+        public RecipeDataModel(string _name, List<string> _ingredients, List<string>? _instructions, string? _imageUrl)
         {
             this.Name = _name;
             this.Ingredients = _ingredients;
             this.Instructions = _instructions;
+            this.ImageUrl = _imageUrl;
         }
 
         public RecipeDataModel()

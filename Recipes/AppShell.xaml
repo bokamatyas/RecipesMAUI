@@ -3,13 +3,28 @@
     x:Class="Recipes.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Recipes.Pages"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:local="clr-namespace:Recipes"
+    xmlns:pages="clr-namespace:Recipes.Pages"
+    Shell.FlyoutBehavior="Flyout"
     Title="Recipes">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem Title="Recipes">
+        <ShellContent
+            Title="Recipes"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="MainPage"/>
+    </FlyoutItem>
+    <FlyoutItem Title="New Recipe">
+        <ShellContent
+            Title="New Recipe"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="MainPage"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Read Recipe from QR">
+        <ShellContent
+            Title="Read Recipe from QR"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="MainPage"/>
+    </FlyoutItem>
 
 </Shell>
