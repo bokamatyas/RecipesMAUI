@@ -27,12 +27,14 @@ namespace Recipes.Models
             this.Name = _name;
             this.Ingredients = _ingredients;
             this.Instructions = _instructions;
-            this.ImageUrl = _imageUrl;
+            if (_imageUrl is not null)
+                this.ImageUrl = _imageUrl;
+            else
+                this.ImageUrl = "noimage.png";
         }
 
         public RecipeDataModel()
         {
-            
         }
     }
 }
