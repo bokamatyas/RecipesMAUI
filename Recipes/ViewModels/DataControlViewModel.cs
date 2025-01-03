@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Recipes.Models;
+using Recipes.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,6 +42,22 @@ namespace Recipes.ViewModels
         }
 
         [RelayCommand]
+        private async Task Back()
+        {
+            try
+            {
+                await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
+
+            [RelayCommand]
         private async Task Save()
         {
             
@@ -52,6 +69,7 @@ namespace Recipes.ViewModels
                     RecipeData.Instructions = String.Join(';', Instructions.Split('\n'));
                     if (String.IsNullOrWhiteSpace(RecipeData.ImageUrl)) RecipeData.ImageUrl = "noimage.png";
                     await RecipeDataBase.SaveItemAsync(RecipeData);
+                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
                 }
             }
             catch (Exception ex)

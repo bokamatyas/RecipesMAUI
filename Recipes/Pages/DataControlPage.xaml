@@ -9,8 +9,9 @@
         <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView>
-        <Grid RowDefinitions="*,2*,2*,*,*" Margin="10">
-            <VerticalStackLayout Grid.Row="0">
+        <Grid RowDefinitions="*,*,2*,2*,*,*" Margin="10">
+            <Button Text="Go back" Command="{Binding BackCommand}"/>
+            <VerticalStackLayout Grid.Row="1">
                 <Label Text="Name:"/>
                 <Entry Text="{Binding RecipeData.Name}"/>
             </VerticalStackLayout>

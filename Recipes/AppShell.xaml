@@ -5,23 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Recipes"
     xmlns:pages="clr-namespace:Recipes.Pages"
-    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
     Title="Recipes">
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent
-            Title="Recipes"
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="MainPage"/>
-        <ShellContent
-            Title="New Recipe"
-            ContentTemplate="{DataTemplate pages:DataControlPage}"
-            Route="DataControlPage"
-            FlyoutItemIsVisible="False"/>
-        <ShellContent
-            Title="Read Recipe from QR"
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="MainPage"/>
-    </FlyoutItem>
+    <TabBar>
+        <Tab Title="Recipes">
+            <ShellContent            
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="MainPage"/>
+        </Tab>
+        <Tab Title="Read Recipe from QR">
+            <ShellContent            
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="QRPage"/>
+        </Tab>
+
+    </TabBar>
+    <ShellContent   
+                Title="New Recipe"
+                ContentTemplate="{DataTemplate pages:DataControlPage}"
+                Route="DataControlPage"/>
 
 </Shell>
