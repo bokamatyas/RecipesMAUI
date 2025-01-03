@@ -10,6 +10,6 @@ public partial class DataControlPage : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = _vm;
-		_vm.RecipeData = InputRecipeData;
+		_vm.RecipeData = InputRecipeData;		
 	}
 }

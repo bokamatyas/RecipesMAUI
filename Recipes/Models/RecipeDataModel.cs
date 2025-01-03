@@ -16,14 +16,14 @@ namespace Recipes.Models
         public string Name { get; set; }
 
         [NotNull]
-        public List<string> Ingredients { get; set; }
+        public string Ingredients { get; set; }
         
-        public List<string>? Instructions { get; set; }
+        public string? Instructions { get; set; }
 
         [NotNull]
         public string? ImageUrl { get; set; }
 
-        public RecipeDataModel(string _name, List<string> _ingredients, List<string>? _instructions, string? _imageUrl)
+        public RecipeDataModel(string _name, string _ingredients, string? _instructions, string? _imageUrl)
         {
             this.Name = _name;
             this.Ingredients = _ingredients;
@@ -37,8 +37,8 @@ namespace Recipes.Models
         public RecipeDataModel()
         {
             this.Name = "TEST";
-            this.Ingredients = [];
-            this.ImageUrl = "noimage.png";
+            this.Ingredients = "";
+            this.ImageUrl = "";
         }
     }
 }

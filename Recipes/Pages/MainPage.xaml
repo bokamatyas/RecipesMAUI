@@ -17,11 +17,11 @@
                     <CollectionView.HeaderTemplate>
                         <DataTemplate>
                             <Grid ColumnDefinitions="*,*">
-                                <Border Stroke="Black" Grid.Column="0">
-                                    <Label Text="Name" FontAttributes="Bold" HorizontalOptions="Center" Padding="10"/>
+                                <Border Stroke="Black">
+                                    <Label Text="Image" FontAttributes="Bold" HorizontalOptions="Center" Padding="10"/>
                                 </Border>
-                                <Border Stroke="Black" Grid.Column="0">
-
+                                <Border Stroke="Black" Grid.Column="1">
+                                    <Label Text="Name" FontAttributes="Bold" HorizontalOptions="Center" Padding="10"/>
                                 </Border>
                             </Grid>
                         </DataTemplate>
@@ -30,7 +30,7 @@
                         <DataTemplate>
                             <Grid ColumnDefinitions="*,*">
                                 <Image Source="{Binding ImageUrl}" HeightRequest="100" HorizontalOptions="Center"/>
-                                <Label Text="" FontAttributes="Bold" HeightRequest="100" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Name}" Grid.Column="1" FontAttributes="Bold" HeightRequest="100" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                                 <Line X2="1000" Stroke="Black" Grid.ColumnSpan="2"/>
                             </Grid>
                         </DataTemplate>

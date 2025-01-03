@@ -2,11 +2,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Recipes.Pages.DataControlPage"
-             Title="DataControlPage">
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui">
+    
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <ScrollView>
-        <Grid>
-            <Label Text="{Binding RecipeData.Name}"/>
-            <Image Source="{Binding RecipeData.ImageUrl}" HeightRequest="100" HorizontalOptions="Center"/>
+        <Grid RowDefinitions="*,2*,2*,*,*" Margin="10">
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="Name:"/>
+                <Entry Text="{Binding RecipeData.Name}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="1">
+                <Label Text="Ingredients:"/>
+                <Editor Text="{Binding Ingredients}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="2">
+                <Label Text="Instructions:"/>
+                <Editor Text="{Binding Instructions}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter instructions"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="3">
+                <Label Text="Image URL"/>
+                <Entry Text="{Binding RecipeData.ImageUrl}"/>
+            </VerticalStackLayout>
+            <Button Grid.Row="4" Text="Save" Command="{Binding SaveCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>
