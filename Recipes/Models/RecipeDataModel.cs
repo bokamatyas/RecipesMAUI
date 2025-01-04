@@ -40,5 +40,13 @@ namespace Recipes.Models
             this.Ingredients = "";
             this.ImageUrl = "";
         }
+
+        public RecipeDataModel(RecipeDataModel _recipeData)
+        {
+            this.Name = _recipeData.Name;
+            this.Ingredients = _recipeData.Ingredients;
+            this.Instructions = _recipeData.Instructions;
+            this.ImageUrl = _recipeData.ImageUrl;
+        }
     }
 }

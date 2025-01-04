@@ -12,7 +12,7 @@ using Application = Microsoft.Maui.Controls.Application;
 
 namespace Recipes.ViewModels
 {
-    public partial class DataControlViewModel: ObservableObject
+    public partial class DataControlViewModel: ObservableObject, IQueryAttributable
     {
 
         [ObservableProperty]
@@ -23,6 +23,11 @@ namespace Recipes.ViewModels
 
         [ObservableProperty]
         public string? instructions;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
+        {
+            RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
+        }
 
         [RelayCommand]
         private void Appearing()
@@ -46,6 +51,7 @@ namespace Recipes.ViewModels
         {
             try
             {
+                this.RecipeData = null;
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
             }
             catch (Exception ex)
@@ -57,7 +63,7 @@ namespace Recipes.ViewModels
             }
         }
 
-            [RelayCommand]
+        [RelayCommand]
         private async Task Save()
         {
             

@@ -42,8 +42,33 @@ namespace Recipes.ViewModels
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    DataControlPage.InputRecipeData = new RecipeDataModel();
+                    var navigationParameters = new Dictionary<string, object>
+                    {
+                        { "recipeData", new RecipeDataModel() },
+                    };
                     await Shell.Current.GoToAsync($"//{nameof(DataControlPage)}", true);
+                });
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
+
+        async partial void OnSelectedRecipeDataChanged(RecipeDataModel? value)
+        {
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {                    
+                    var navigationParameters = new Dictionary<string, object>
+                    {
+                        { "recipeData", SelectedRecipeData },
+                    };
+                    await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
                 });
             }
             catch (Exception ex)

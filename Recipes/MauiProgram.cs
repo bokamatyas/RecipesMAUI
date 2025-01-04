@@ -22,6 +22,8 @@ namespace Recipes
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<DataControlPage>();
             builder.Services.AddSingleton<DataControlViewModel>();
+            builder.Services.AddSingleton<ViewRecipePage>();
+            builder.Services.AddSingleton<ViewRecipeViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
