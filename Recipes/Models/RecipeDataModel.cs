@@ -18,16 +18,16 @@ namespace Recipes.Models
         [NotNull]
         public string Ingredients { get; set; }
         
-        public string? Instructions { get; set; }
+        public string? InstructionsURL { get; set; }
 
         [NotNull]
         public string? ImageUrl { get; set; }
 
-        public RecipeDataModel(string _name, string _ingredients, string? _instructions, string? _imageUrl)
+        public RecipeDataModel(string _name, string _ingredients, string? _instructionsURL, string? _imageUrl)
         {
             this.Name = _name;
             this.Ingredients = _ingredients;
-            this.Instructions = _instructions;
+            this.InstructionsURL = _instructionsURL;
             if (_imageUrl is not null)
                 this.ImageUrl = _imageUrl;
             else
@@ -45,7 +45,7 @@ namespace Recipes.Models
         {
             this.Name = _recipeData.Name;
             this.Ingredients = _recipeData.Ingredients;
-            this.Instructions = _recipeData.Instructions;
+            this.InstructionsURL = _recipeData.InstructionsURL;
             this.ImageUrl = _recipeData.ImageUrl;
         }
     }

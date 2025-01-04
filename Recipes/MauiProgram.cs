@@ -17,6 +17,7 @@ namespace Recipes
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("fa_solid.ttf", "FontAwesome");
                 });
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();

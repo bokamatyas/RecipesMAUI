@@ -21,9 +21,6 @@ namespace Recipes.ViewModels
         [ObservableProperty]
         public string? ingredients;
 
-        [ObservableProperty]
-        public string? instructions;
-
         public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
         {
             RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
@@ -34,25 +31,7 @@ namespace Recipes.ViewModels
         {
             try
             {
-                Ingredients = String.Join('\n', RecipeData.Ingredients);
-                Instructions = String.Join('\n', RecipeData.Instructions);
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Debug.WriteLine(ex);
-#endif
-                return;
-            }
-        }
-
-        [RelayCommand]
-        private async Task Back()
-        {
-            try
-            {
-                this.RecipeData = null;
-                await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
+                Ingredients = String.Join('\n', RecipeData.Ingredients.Split(';'));
             }
             catch (Exception ex)
             {
@@ -72,8 +51,8 @@ namespace Recipes.ViewModels
                 if (!await InputCheck())
                 {
                     RecipeData.Ingredients = String.Join(';', Ingredients.Split('\n'));
-                    RecipeData.Instructions = String.Join(';', Instructions.Split('\n'));
                     if (String.IsNullOrWhiteSpace(RecipeData.ImageUrl)) RecipeData.ImageUrl = "noimage.png";
+
                     await RecipeDataBase.SaveItemAsync(RecipeData);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
                 }
