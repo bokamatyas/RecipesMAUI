@@ -25,6 +25,8 @@ namespace Recipes
             builder.Services.AddSingleton<DataControlViewModel>();
             builder.Services.AddSingleton<ViewRecipePage>();
             builder.Services.AddSingleton<ViewRecipeViewModel>();
+            Routing.RegisterRoute(nameof(ViewRecipePage), typeof(ViewRecipePage));
+            Routing.RegisterRoute(nameof(DataControlPage), typeof(DataControlPage));
 
 #if DEBUG
     		builder.Logging.AddDebug();

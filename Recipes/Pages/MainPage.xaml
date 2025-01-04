@@ -5,9 +5,7 @@
              x:Class="Recipes.Pages.MainPage"
              BackgroundColor="{x:StaticResource PageBG}"
              Title="Recipes"
-             Shell.BackgroundColor="{x:StaticResource Primary}"
-             Shell.ForegroundColor="{x:StaticResource White}"
-             Shell.TitleColor="{x:StaticResource White}">
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
@@ -44,6 +42,18 @@
                                 <Image Source="{Binding ImageUrl}" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" Margin="0,20"/>
                                 <Label Text="{Binding Name}" Grid.Column="1" FontAttributes="Bold" HeightRequest="100" VerticalTextAlignment="Center" HorizontalOptions="Center" TextColor="{x:StaticResource White}" FontSize="24" LineBreakMode="WordWrap"/>
                                 <Line X2="1000" Stroke="Black" Grid.ColumnSpan="2" StrokeThickness="3"/>
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal"></VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#7D8CC4"></Setter>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

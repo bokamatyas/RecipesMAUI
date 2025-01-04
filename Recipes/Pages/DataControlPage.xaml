@@ -42,13 +42,15 @@
                 <VerticalStackLayout>
                     <Label Text="Recipe name:"/>
                     <Border>
-                        <Entry Text="{Binding RecipeData.Name}" Placeholder="Enter name"/>
+                        <Entry Text="{Binding RecipeData.Name}" Placeholder="Enter name" MaxLength="50"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="Ingredients:"/>
                     <Border>
-                        <Editor Text="{Binding Ingredients}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
+                        <ScrollView Orientation="Both">
+                            <Editor Text="{Binding Ingredients}" MinimumWidthRequest="400" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
+                        </ScrollView>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>

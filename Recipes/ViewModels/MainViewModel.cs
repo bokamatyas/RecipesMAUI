@@ -50,7 +50,7 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", new RecipeDataModel() },
                     };
-                    await Shell.Current.GoToAsync($"//{nameof(DataControlPage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);
                 });
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", SelectedRecipeData },
                     };
-                    await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
                 });
             }
             catch (Exception ex)
