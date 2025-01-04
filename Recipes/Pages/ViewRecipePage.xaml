@@ -6,8 +6,7 @@
 
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
-        <!--<tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>-->
-        <tool:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView>
         <Grid RowDefinitions="*,*,*,*,*" Margin="10">
@@ -18,7 +17,7 @@
             </HorizontalStackLayout>
             <Image Source="{Binding RecipeData.ImageUrl}" Grid.Row="1"/>
             <Label Text="{Binding RecipeData.Name}" Grid.Row="2"/>
-            <Label Text="{Binding RecipeData.Ingredients}" Grid.Row="3"/>
+            <Label Text="{Binding Ingredients}" Grid.Row="3"/>
             <Label Text="{Binding RecipeData.Instructions}" Grid.Row="4"/>
         </Grid>
     </ScrollView>

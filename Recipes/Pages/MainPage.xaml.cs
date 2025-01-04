@@ -9,6 +9,7 @@ namespace Recipes.Pages
         {
             InitializeComponent();
             this.BindingContext = _vm;
+            _vm.ToggleShake();
         }
         
     }

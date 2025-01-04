@@ -19,12 +19,16 @@ namespace Recipes.ViewModels
         [ObservableProperty]
         public RecipeDataModel? selectedRecipeData;
 
+        [ObservableProperty]
+        public List<int>? recipeIds;
+
         [RelayCommand]
         private void Appearing()
         {
             try
             {
                 RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result;
+                RecipeIds = RecipesData.Select(r => r.Id).ToList();
             }
             catch (Exception ex)
             {
@@ -79,5 +83,57 @@ namespace Recipes.ViewModels
                 return;
             }
         }
+
+        public void ToggleShake()
+        {
+            try
+            {
+                if (Accelerometer.IsSupported)
+                {
+                    if (!Accelerometer.Default.IsMonitoring)
+                    {
+                        Accelerometer.Default.ShakeDetected += Default_ShakeDetected;
+                        Accelerometer.Default.Start(SensorSpeed.Game);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
+
+        private async void Default_ShakeDetected(object? sender, EventArgs e)
+        {
+            try
+            {
+                if(RecipesData is not null && RecipeIds is not null)
+                {
+                    Random rnd = new Random();
+                    int id = RecipeIds[rnd.Next(0, RecipeIds.Count)];
+                    RecipeDataModel? selected = Task.Run(() => RecipeDataBase.GetItemAsync(id)).Result;
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        var navigationParameters = new Dictionary<string, object>
+                        {
+                        { "recipeData", selected },
+                        };
+                        await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                    });
+                } else
+                    await Application.Current.MainPage.DisplayAlert("Warning", "You have no recipes!", "OK");
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
     }
+
 }

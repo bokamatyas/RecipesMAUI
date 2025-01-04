@@ -16,6 +16,25 @@ namespace Recipes.ViewModels
         [ObservableProperty]
         public RecipeDataModel? recipeData;
 
+        [ObservableProperty]
+        public string? ingredients;
+
+        [RelayCommand]
+        private void Appearing()
+        {
+            try
+            {
+                Ingredients = String.Join('\n', RecipeData.Ingredients.Split(';'));
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
         {
             RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
