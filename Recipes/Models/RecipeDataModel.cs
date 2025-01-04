@@ -36,7 +36,7 @@ namespace Recipes.Models
 
         public RecipeDataModel()
         {
-            this.Name = "TEST";
+            this.Name = "";
             this.Ingredients = "";
             this.ImageUrl = "";
         }

@@ -12,9 +12,9 @@
     <ScrollView>
         <Grid RowDefinitions="*,*,*,*,*" Margin="10">
             <HorizontalStackLayout>
-                <Button Text="Edit"/>
-                <Button Text="Delete"/>
-                <Button Text="Share"/>
+                <Button Text="Edit" Command="{Binding EditCommand}"/>
+                <Button Text="Delete" Command="{Binding DeleteCommand}"/>
+                <Button Text="Share" Command="{Binding ShareCommand}"/>
             </HorizontalStackLayout>
             <Image Source="{Binding RecipeData.ImageUrl}" Grid.Row="1"/>
             <Label Text="{Binding RecipeData.Name}" Grid.Row="2"/>

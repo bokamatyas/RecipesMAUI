@@ -15,19 +15,19 @@
                 <Label Text="Name:"/>
                 <Entry Text="{Binding RecipeData.Name}"/>
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="1">
+            <VerticalStackLayout Grid.Row="2">
                 <Label Text="Ingredients:"/>
                 <Editor Text="{Binding Ingredients}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="2">
+            <VerticalStackLayout Grid.Row="3">
                 <Label Text="Instructions:"/>
                 <Editor Text="{Binding Instructions}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter instructions"/>
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.Row="3">
+            <VerticalStackLayout Grid.Row="4">
                 <Label Text="Image URL"/>
                 <Entry Text="{Binding RecipeData.ImageUrl}"/>
             </VerticalStackLayout>
-            <Button Grid.Row="4" Text="Save" Command="{Binding SaveCommand}"/>
+            <Button Grid.Row="5" Text="Save" Command="{Binding SaveCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>
