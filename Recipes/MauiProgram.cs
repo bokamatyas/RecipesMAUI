@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Recipes.Pages;
 using Recipes.ViewModels;
+using ZXing.Net.Maui.Controls;
 
 namespace Recipes
 {
@@ -13,6 +14,7 @@ namespace Recipes
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -25,9 +27,13 @@ namespace Recipes
             builder.Services.AddSingleton<DataControlViewModel>();
             builder.Services.AddSingleton<ViewRecipePage>();
             builder.Services.AddSingleton<ViewRecipeViewModel>();
+            builder.Services.AddSingleton<QRHandlerPage>();
+            builder.Services.AddSingleton<QRHandlerViewModel>();
+            builder.Services.AddSingleton<CameraHandlerPage>();
+            builder.Services.AddSingleton<CameraHandlerViewModel>();
             Routing.RegisterRoute(nameof(ViewRecipePage), typeof(ViewRecipePage));
             Routing.RegisterRoute(nameof(DataControlPage), typeof(DataControlPage));
-
+            Routing.RegisterRoute(nameof(QRHandlerPage), typeof(QRHandlerPage));
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

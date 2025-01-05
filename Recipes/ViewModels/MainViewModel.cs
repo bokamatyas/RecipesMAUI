@@ -51,6 +51,7 @@ namespace Recipes.ViewModels
                         { "recipeData", new RecipeDataModel() },
                     };
                     await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);
+                    navigationParameters.Clear();
                 });
             }
             catch (Exception ex)
@@ -73,6 +74,7 @@ namespace Recipes.ViewModels
                         { "recipeData", SelectedRecipeData },
                     };
                     await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
+                    navigationParameters.Clear();
                 });
             }
             catch (Exception ex)
@@ -122,6 +124,7 @@ namespace Recipes.ViewModels
                         { "recipeData", selected },
                         };
                         await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                        navigationParameters.Clear();
                     });
                 } else
                     await Application.Current.MainPage.DisplayAlert("Warning", "You have no recipes!", "OK");

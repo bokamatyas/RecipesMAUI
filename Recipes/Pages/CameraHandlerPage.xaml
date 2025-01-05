@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"             
+             x:Class="Recipes.Pages.CameraHandlerPage"
+             Title="CameraHandlerPage"
+             Shell.NavBarIsVisible="False">
+    
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+    <Grid x:Name="cameraGrid"/>
+</ContentPage>

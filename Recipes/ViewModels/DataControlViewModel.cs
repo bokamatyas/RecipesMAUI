@@ -31,7 +31,7 @@ namespace Recipes.ViewModels
             
             try
             {
-                if (!await InputCheck())
+                if (await InputCheck())
                 {
                     if (String.IsNullOrWhiteSpace(RecipeData.ImageUrl)) RecipeData.ImageUrl = "noimage.png";
 
@@ -55,9 +55,14 @@ namespace Recipes.ViewModels
                 if (String.IsNullOrWhiteSpace(RecipeData.Name))
                 {
                     await Application.Current.MainPage.DisplayAlert("Warning", "Name must be given!", "OK");
-                    return true;
+                    return false;
                 };
-                return false;
+                if (String.IsNullOrWhiteSpace(RecipeData.InstructionsURL))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Warning", "Please provide a URL link to your recipe", "OK");
+                    return false;
+                };
+                return true;
             }
             catch (Exception ex)
             {

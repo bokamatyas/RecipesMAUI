@@ -22,8 +22,8 @@
 
         <Tab Title="Read Recipe from QR">
             <ShellContent                       
-                ContentTemplate="{DataTemplate pages:MainPage}"
-                Route="QRPage"/>
+                ContentTemplate="{DataTemplate pages:CameraHandlerPage}"
+                Route="CameraHandlerPage"/>
         </Tab>
     </TabBar>
 
