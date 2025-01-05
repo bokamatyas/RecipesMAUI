@@ -6,7 +6,11 @@
     xmlns:local="clr-namespace:Recipes"
     xmlns:pages="clr-namespace:Recipes.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Title="Recipes">
+    Title="Recipes"
+    BackgroundColor="{x:StaticResource PageBG}"
+    Shell.TabBarBackgroundColor="{x:StaticResource Primary}"
+    Shell.TabBarTitleColor="{x:StaticResource White}"
+    Shell.TabBarUnselectedColor="{x:StaticResource Gray100}">
 
 
     <TabBar>

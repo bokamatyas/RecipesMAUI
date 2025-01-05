@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Recipes.Pages.ViewRecipePage"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             BackgroundColor="{x:StaticResource PageBG}"
              Title="View Recipe"
              Shell.BackgroundColor="{x:StaticResource Primary}"
              Shell.ForegroundColor="{x:StaticResource White}"
-             Shell.TitleColor="{x:StaticResource White}">
+             Shell.TitleColor="{x:StaticResource White}"
+             Shell.TabBarIsVisible="False">
 
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>

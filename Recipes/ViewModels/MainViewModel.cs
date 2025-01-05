@@ -27,7 +27,7 @@ namespace Recipes.ViewModels
         {
             try
             {
-                RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result;
+                RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result.OrderByDescending(r => r.Rating).ToList();
                 RecipeIds = RecipesData.Select(r => r.Id).ToList();
             }
             catch (Exception ex)
