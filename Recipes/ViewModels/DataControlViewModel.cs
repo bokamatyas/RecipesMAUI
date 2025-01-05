@@ -18,29 +18,12 @@ namespace Recipes.ViewModels
         [ObservableProperty]
         public RecipeDataModel? recipeData;
 
-        [ObservableProperty]
-        public string? ingredients;
 
         public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
         {
             RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
         }
 
-        [RelayCommand]
-        private void Appearing()
-        {
-            try
-            {
-                Ingredients = String.Join('\n', RecipeData.Ingredients.Split(';'));
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Debug.WriteLine(ex);
-#endif
-                return;
-            }
-        }
 
         [RelayCommand]
         private async Task Save()
@@ -48,9 +31,8 @@ namespace Recipes.ViewModels
             
             try
             {
-                if (!await InputCheck())
+                if (await InputCheck())
                 {
-                    RecipeData.Ingredients = String.Join(';', Ingredients.Split('\n'));
                     if (String.IsNullOrWhiteSpace(RecipeData.ImageUrl)) RecipeData.ImageUrl = "noimage.png";
 
                     await RecipeDataBase.SaveItemAsync(RecipeData);
@@ -73,14 +55,14 @@ namespace Recipes.ViewModels
                 if (String.IsNullOrWhiteSpace(RecipeData.Name))
                 {
                     await Application.Current.MainPage.DisplayAlert("Warning", "Name must be given!", "OK");
-                    return true;
+                    return false;
                 };
-                if (String.IsNullOrWhiteSpace(Ingredients))
+                if (String.IsNullOrWhiteSpace(RecipeData.InstructionsURL))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Warning", "At least 1 ingredient is required!", "OK");
-                    return true;
+                    await Application.Current.MainPage.DisplayAlert("Warning", "Please provide a URL link to your recipe", "OK");
+                    return false;
                 };
-                return false;
+                return true;
             }
             catch (Exception ex)
             {

@@ -15,18 +15,17 @@ namespace Recipes.Models
         [NotNull]
         public string Name { get; set; }
 
-        [NotNull]
-        public string Ingredients { get; set; }
+        public int? Rating { get ; set; }
         
         public string? InstructionsURL { get; set; }
 
         [NotNull]
         public string? ImageUrl { get; set; }
 
-        public RecipeDataModel(string _name, string _ingredients, string? _instructionsURL, string? _imageUrl)
+        public RecipeDataModel(string _name, int _rating, string? _instructionsURL, string? _imageUrl)
         {
             this.Name = _name;
-            this.Ingredients = _ingredients;
+            this.Rating = _rating;
             this.InstructionsURL = _instructionsURL;
             if (_imageUrl is not null)
                 this.ImageUrl = _imageUrl;
@@ -37,14 +36,15 @@ namespace Recipes.Models
         public RecipeDataModel()
         {
             this.Name = "";
-            this.Ingredients = "";
+            this.Rating = 1;
             this.ImageUrl = "";
+            this.Rating = 1;
         }
 
         public RecipeDataModel(RecipeDataModel _recipeData)
         {
             this.Name = _recipeData.Name;
-            this.Ingredients = _recipeData.Ingredients;
+            this.Rating = _recipeData.Rating;
             this.InstructionsURL = _recipeData.InstructionsURL;
             this.ImageUrl = _recipeData.ImageUrl;
         }

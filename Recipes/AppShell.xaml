@@ -5,34 +5,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Recipes"
     xmlns:pages="clr-namespace:Recipes.Pages"
-    Shell.FlyoutBehavior="Flyout"
-    Title="Recipes">
+    Shell.FlyoutBehavior="Disabled"
+    Title="Recipes"
+    BackgroundColor="{x:StaticResource PageBG}"
+    Shell.TabBarBackgroundColor="{x:StaticResource Primary}"
+    Shell.TabBarTitleColor="{x:StaticResource White}"
+    Shell.TabBarUnselectedColor="{x:StaticResource Gray100}">
 
 
-    <FlyoutItem Title="Recipes">
-        <ShellContent            
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="MainPage"/>
-    </FlyoutItem>
-    
-    <FlyoutItem Title="Read Recipe from QR">
-        <ShellContent                       
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="QRPage"/>
-    </FlyoutItem>
+    <TabBar>
+        <Tab Title="Recipes">
+            <ShellContent            
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="MainPage"/>
+        </Tab>
 
-    <FlyoutItem Title="New Recipe" FlyoutItemIsVisible="False">
-        <ShellContent            
-            ContentTemplate="{DataTemplate pages:DataControlPage}"
-            Route="DataControlPage"/>
-    </FlyoutItem>
-
-    <FlyoutItem Title="View Recipe" FlyoutItemIsVisible="False">
-        <ShellContent            
-            ContentTemplate="{DataTemplate pages:ViewRecipePage}"
-            Route="ViewRecipePage"/>
-    </FlyoutItem>
-    
-            
+        <Tab Title="Read Recipe from QR">
+            <ShellContent                       
+                ContentTemplate="{DataTemplate pages:CameraHandlerPage}"
+                Route="CameraHandlerPage"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

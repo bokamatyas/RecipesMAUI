@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Recipes.Pages.DataControlPage"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             BackgroundColor="{x:StaticResource PageBG}"
              Title="Edit/Create Recipe"
              Shell.BackgroundColor="{x:StaticResource Primary}"
              Shell.ForegroundColor="{x:StaticResource White}"
-             Shell.TitleColor="{x:StaticResource White}">
+             Shell.TitleColor="{x:StaticResource White}"
+             Shell.TabBarIsVisible="False">
     
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
@@ -42,19 +42,22 @@
                 <VerticalStackLayout>
                     <Label Text="Recipe name:"/>
                     <Border>
-                        <Entry Text="{Binding RecipeData.Name}" Placeholder="Enter name"/>
+                        <Entry Text="{Binding RecipeData.Name}" Placeholder="Enter name" MaxLength="50"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
-                    <Label Text="Ingredients:"/>
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="Rating: "/>
+                        <Label x:Name="LBL_rating"/>
+                    </HorizontalStackLayout>
                     <Border>
-                        <Editor Text="{Binding Ingredients}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
+                        <Slider Value="{Binding RecipeData.Rating}" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
-                    <Label Text="Instructions:"/>
+                    <Label Text="Instructions URL:"/>
                     <Border>
-                        <Entry Text="{Binding RecipeData.Instructions}" MinimumHeightRequest="20" Placeholder="Enter instructions url"/>
+                        <Entry Text="{Binding RecipeData.InstructionsURL}" Placeholder="Enter instructions url"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>

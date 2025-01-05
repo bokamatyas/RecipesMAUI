@@ -27,7 +27,7 @@ namespace Recipes.ViewModels
         {
             try
             {
-                RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result;
+                RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result.OrderByDescending(r => r.Rating).ToList();
                 RecipeIds = RecipesData.Select(r => r.Id).ToList();
             }
             catch (Exception ex)
@@ -50,7 +50,8 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", new RecipeDataModel() },
                     };
-                    await Shell.Current.GoToAsync($"//{nameof(DataControlPage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);
+                    navigationParameters.Clear();
                 });
             }
             catch (Exception ex)
@@ -72,7 +73,8 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", SelectedRecipeData },
                     };
-                    await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
+                    navigationParameters.Clear();
                 });
             }
             catch (Exception ex)
@@ -122,6 +124,7 @@ namespace Recipes.ViewModels
                         { "recipeData", selected },
                         };
                         await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                        navigationParameters.Clear();
                     });
                 } else
                     await Application.Current.MainPage.DisplayAlert("Warning", "You have no recipes!", "OK");

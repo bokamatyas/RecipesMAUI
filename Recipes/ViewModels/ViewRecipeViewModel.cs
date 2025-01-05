@@ -19,22 +19,6 @@ namespace Recipes.ViewModels
         [ObservableProperty]
         public string? ingredients;
 
-        [RelayCommand]
-        private void Appearing()
-        {
-            try
-            {
-                Ingredients = String.Join('\n', RecipeData.Ingredients.Split(';'));
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Debug.WriteLine(ex);
-#endif
-                return;
-            }
-        }
-
         public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
         {
             RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
@@ -51,7 +35,8 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", RecipeData },
                     };
-                    await Shell.Current.GoToAsync($"//{nameof(DataControlPage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);
+                    navigationParameters.Clear();
                 });
             }
             catch (Exception ex)
@@ -64,7 +49,7 @@ namespace Recipes.ViewModels
         }
 
         [RelayCommand]
-        private async void Delete()
+        private async Task Delete()
         {
             try
             {
@@ -84,11 +69,53 @@ namespace Recipes.ViewModels
         }
 
         [RelayCommand]
-        private void Share()
+        private async Task Share()
         {
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    var navigationParameters = new Dictionary<string, object>
+                    {
+                        { "recipeData", RecipeData },
+                    };
+                    await Shell.Current.GoToAsync($"{nameof(QRHandlerPage)}", true, navigationParameters);
+                    navigationParameters.Clear();
+                });
 
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
         }
 
+        [RelayCommand]
+        private async Task OpenLink()
+        {
+            try
+            {
+                Uri uri = new Uri(RecipeData.InstructionsURL);
+                BrowserLaunchOptions options = new()
+                {
+                    LaunchMode = BrowserLaunchMode.SystemPreferred,
+                    TitleMode = BrowserTitleMode.Show,
+                    PreferredToolbarColor = Colors.DarkBlue,
+                    PreferredControlColor = Colors.White,
+                };
+                await Browser.Default.OpenAsync(uri, options);
 
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+        }
     }
 }
