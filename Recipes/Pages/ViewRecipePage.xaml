@@ -11,7 +11,6 @@
 
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
-        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView>
         <Grid RowDefinitions=".3*,*,.5*,*,*" Margin="10">
@@ -32,9 +31,9 @@
             </Border>
             <Label Text="{Binding RecipeData.Name}" Grid.Row="2" HorizontalTextAlignment="Center" FontSize="48" FontFamily="sans-serif-light" LineBreakMode="TailTruncation"/>
             <VerticalStackLayout Grid.Row="3">
-                <Label Text="Ingredients:" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label Text="Rating:" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                 <Line X2="1000" Stroke="Black"/>
-                <Label Text="{Binding Ingredients}" FontSize="20" HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding RecipeData.Rating}" FontSize="20" HorizontalTextAlignment="Center"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Row="4">
                 <Label Text="Instructions URL:" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>

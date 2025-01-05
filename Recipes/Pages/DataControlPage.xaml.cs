@@ -10,4 +10,10 @@ public partial class DataControlPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = _vm;
 	}
+
+    private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        (sender as Slider).Value = Math.Round((sender as Slider).Value);
+
+    }
 }

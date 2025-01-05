@@ -46,17 +46,15 @@
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
-                    <Label Text="Ingredients:"/>
+                    <Label Text="Rating:"/>
                     <Border>
-                        <ScrollView Orientation="Both">
-                            <Editor Text="{Binding Ingredients}" MinimumWidthRequest="400" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
-                        </ScrollView>
+                        <Slider Value="{Binding RecipeData.Rating}" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
-                    <Label Text="Instructions:"/>
+                    <Label Text="Instructions URL:"/>
                     <Border>
-                        <Entry Text="{Binding RecipeData.Instructions}" MinimumHeightRequest="20" Placeholder="Enter instructions url"/>
+                        <Entry Text="{Binding RecipeData.InstructionsURL}" Placeholder="Enter instructions url"/>
                     </Border>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
