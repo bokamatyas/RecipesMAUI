@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recipes.Pages.ViewRecipePage"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             BackgroundColor="{x:StaticResource PageBG}"
+             Title="View Recipe"
+             Shell.BackgroundColor="{x:StaticResource Primary}"
+             Shell.ForegroundColor="{x:StaticResource White}"
+             Shell.TitleColor="{x:StaticResource White}">
+
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+    <ScrollView>
+        <Grid RowDefinitions=".3*,*,.5*,*,*" Margin="10">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="WidthRequest" Value="100"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontAttributes" Value="Bold"/>
+                </Style>
+            </Grid.Resources>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <Button Text="Edit" Command="{Binding EditCommand}" BackgroundColor="DarkGoldenrod"/>
+                <Button Text="Delete" Command="{Binding DeleteCommand}" BackgroundColor="Red" TextColor="{x:StaticResource White}"/>
+                <Button Text="Share" Command="{Binding ShareCommand}" HorizontalOptions="End" BackgroundColor="CadetBlue"/>
+            </HorizontalStackLayout>
+            <Border Grid.Row="1" Margin="50,40,50,10" Stroke="Black" StrokeThickness="8">
+                <Image Source="{Binding RecipeData.ImageUrl}"/>
+            </Border>
+            <Label Text="{Binding RecipeData.Name}" Grid.Row="2" HorizontalTextAlignment="Center" FontSize="48" FontFamily="sans-serif-light" LineBreakMode="TailTruncation"/>
+            <VerticalStackLayout Grid.Row="3">
+                <Label Text="Ingredients:" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Line X2="1000" Stroke="Black"/>
+                <Label Text="{Binding Ingredients}" FontSize="20" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="4">
+                <Label Text="Instructions URL:" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Line X2="1000" Stroke="Black"/>
+                <Label Text="{Binding RecipeData.InstructionsURL}" FontSize="16" Margin="40,0" LineBreakMode="TailTruncation" TextColor="Blue" TextDecorations="Underline"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

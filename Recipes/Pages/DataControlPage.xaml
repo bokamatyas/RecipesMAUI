@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recipes.Pages.DataControlPage"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             BackgroundColor="{x:StaticResource PageBG}"
+             Title="Edit/Create Recipe"
+             Shell.BackgroundColor="{x:StaticResource Primary}"
+             Shell.ForegroundColor="{x:StaticResource White}"
+             Shell.TitleColor="{x:StaticResource White}">
+    
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+    <ScrollView>
+        <Grid RowDefinitions="*,.3*" Margin="10">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                    <Setter Property="TextColor" Value="{x:StaticResource Black}"/>
+                </Style>
+                <Style TargetType="Entry">
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="BackgroundColor" Value="{x:StaticResource Tertiary}"/>
+                </Style>
+                <Style TargetType="Editor">
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="BackgroundColor" Value="{x:StaticResource Tertiary}"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="Stroke" Value="Black"/>
+                    <Setter Property="StrokeThickness" Value="2"/>
+                    <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                </Style>
+                <Style TargetType="VerticalStackLayout">
+                    <Setter Property="Margin" Value="0,0,0,20"/>
+                </Style>
+            </Grid.Resources>
+            <VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Recipe name:"/>
+                    <Border>
+                        <Entry Text="{Binding RecipeData.Name}" Placeholder="Enter name"/>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Ingredients:"/>
+                    <Border>
+                        <Editor Text="{Binding Ingredients}" MinimumHeightRequest="100" AutoSize="TextChanges" Placeholder="Enter ingredients"/>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Instructions:"/>
+                    <Border>
+                        <Entry Text="{Binding RecipeData.Instructions}" MinimumHeightRequest="20" Placeholder="Enter instructions url"/>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Image URL"/>
+                    <Border>
+                        <Entry Text="{Binding RecipeData.ImageUrl}" Placeholder="Enter image url"/>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <Button Grid.Row="1" Text="Save" Command="{Binding SaveCommand}" Margin="30" FontSize="28"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

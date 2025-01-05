@@ -17,9 +17,14 @@ namespace Recipes
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("fa_solid.ttf", "FontAwesome");
                 });
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<DataControlPage>();
+            builder.Services.AddSingleton<DataControlViewModel>();
+            builder.Services.AddSingleton<ViewRecipePage>();
+            builder.Services.AddSingleton<ViewRecipeViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

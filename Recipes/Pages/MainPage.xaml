@@ -1,10 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Recipes.Pages.MainPage">
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="Recipes.Pages.MainPage"
+             BackgroundColor="{x:StaticResource PageBG}"
+             Title="Recipes"
+             Shell.BackgroundColor="{x:StaticResource Primary}"
+             Shell.ForegroundColor="{x:StaticResource White}"
+             Shell.TitleColor="{x:StaticResource White}">
 
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <ScrollView>
-        
+        <Grid RowDefinitions=".1*,.2*,.2*,*" Margin="10">
+            <Button Text="Add new Recipe" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NewRecipeCommand}"/>
+            <VerticalStackLayout Grid.Row="1" Margin="0,10,0,0">
+                <Line X2="1000" Stroke="Black"/>
+                <Label Text="Recipes" HorizontalOptions="Center" VerticalOptions="Center" FontSize="48" FontFamily="sans-serif-light"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="2" HorizontalOptions="Center">
+                <Label Text="Select a recipe from below" FontSize="28" HorizontalTextAlignment="Center"/>
+                <Label Text="Or shake the device to select a random one!" FontSize="16" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+            <Border Grid.Row="3" Stroke="Black" StrokeShape="RoundRectangle 10" StrokeThickness="3">
+                <CollectionView ItemsSource="{Binding RecipesData}" SelectionMode="Single" SelectedItem="{Binding SelectedRecipeData}" BackgroundColor="{x:StaticResource Tertiary}">
+                    <CollectionView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*">
+                                <Border Stroke="Black">
+                                    <Label Text="Image" FontAttributes="Bold" HorizontalOptions="Center" Padding="10" TextColor="{x:StaticResource White}"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="1">
+                                    <Label Text="Name" FontAttributes="Bold" HorizontalOptions="Center" Padding="10" TextColor="{x:StaticResource White}"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.HeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*">
+                                <Image Source="{Binding ImageUrl}" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" Margin="0,20"/>
+                                <Label Text="{Binding Name}" Grid.Column="1" FontAttributes="Bold" HeightRequest="100" VerticalTextAlignment="Center" HorizontalOptions="Center" TextColor="{x:StaticResource White}" FontSize="24" LineBreakMode="WordWrap"/>
+                                <Line X2="1000" Stroke="Black" Grid.ColumnSpan="2" StrokeThickness="3"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
     </ScrollView>
-
 </ContentPage>

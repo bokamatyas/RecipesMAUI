@@ -5,7 +5,7 @@
         public App()
         {
             InitializeComponent();
-
+            App.Current.UserAppTheme = AppTheme.Light;
             MainPage = new AppShell();
         }
     }
