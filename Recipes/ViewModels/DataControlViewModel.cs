@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Recipes.Models;
 using Recipes.Pages;
+using Recipes.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,6 +35,8 @@ namespace Recipes.ViewModels
                 if (await InputCheck())
                 {
                     if (String.IsNullOrWhiteSpace(RecipeData.ImageUrl)) RecipeData.ImageUrl = "noimage.png";
+                    else await TryImageValidity(RecipeData.ImageUrl);
+
 
                     await RecipeDataBase.SaveItemAsync(RecipeData);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
@@ -62,6 +65,11 @@ namespace Recipes.ViewModels
                     await Application.Current.MainPage.DisplayAlert("Warning", "Please provide a URL link to your recipe", "OK");
                     return false;
                 };
+                if (!TryUriValidity.TryUriConvert(RecipeData.InstructionsURL))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Warning", "Invalid URL format for Instructions URL\nPlease input a valid link", "OK");
+                    return false;
+                }
                 return true;
             }
             catch (Exception ex)
@@ -71,6 +79,33 @@ namespace Recipes.ViewModels
 #endif
                 return false;
             }            
+        }
+
+        private async Task TryImageValidity(string _url)
+        {
+            try
+            {
+                HttpClient httpClient = new();
+                if (!TryUriValidity.TryUriConvert(_url))
+                {
+                    RecipeData.ImageUrl = "noimage.png";
+                    return;
+                }
+                HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Head,
+                    RequestUri = new Uri(_url)
+                };
+                HttpResponseMessage response = await httpClient.SendAsync(request);
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                RecipeData.ImageUrl = "noimage.png";
+                return;
+            }
         }
     }
 }

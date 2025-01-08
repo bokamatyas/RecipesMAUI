@@ -21,7 +21,8 @@ namespace Recipes.ViewModels
 
         public void ApplyQueryAttributes(IDictionary<string, object> _queryAttributes)
         {
-            RecipeData = _queryAttributes["recipeData"] as RecipeDataModel;
+            int id = int.Parse(_queryAttributes["recipeId"].ToString());
+            RecipeData = Task.Run(() => RecipeDataBase.GetItemAsync(id)).Result;
         }
 
         [RelayCommand]
