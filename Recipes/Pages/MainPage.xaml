@@ -4,15 +4,16 @@
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="Recipes.Pages.MainPage"             
              Title="Recipes"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{x:StaticResource PageBG}">
 
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>
         <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView>
-        <Grid RowDefinitions=".1*,.2*,.2*,*" Margin="10">
-            <Button Text="Add new Recipe" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NewRecipeCommand}"/>
+        <Grid RowDefinitions="*,.2*,.2*,*" Margin="10">
+            <Button Text="Add new Recipe" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NewRecipeCommand}" Padding="80, 40"/>
             <VerticalStackLayout Grid.Row="1" Margin="0,10,0,0">
                 <Line X2="1000" Stroke="Black"/>
                 <Label Text="Recipes" HorizontalOptions="Center" VerticalOptions="Center" FontSize="48" FontFamily="sans-serif-light"/>
