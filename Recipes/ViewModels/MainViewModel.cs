@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Recipes.ViewModels
 {
-    public partial class MainViewModel: ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
         public List<RecipeDataModel>? recipesData;
@@ -29,6 +31,8 @@ namespace Recipes.ViewModels
             {
                 RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result.OrderByDescending(r => r.Rating).ToList();
                 RecipeIds = RecipesData.Select(r => r.Id).ToList();
+                if(RecipesData is not null)
+                    TryInternet();
             }
             catch (Exception ex)
             {
@@ -68,10 +72,10 @@ namespace Recipes.ViewModels
             try
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
-                {                    
+                {
                     var navigationParameters = new Dictionary<string, object>
                     {
-                        { "recipeData", SelectedRecipeData },
+                        { "recipeId", SelectedRecipeData.Id },
                     };
                     await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
                     navigationParameters.Clear();
@@ -112,21 +116,21 @@ namespace Recipes.ViewModels
         {
             try
             {
-                if(RecipesData is not null && RecipeIds is not null)
+                if (RecipesData is not null && RecipeIds is not null)
                 {
                     Random rnd = new Random();
                     int id = RecipeIds[rnd.Next(0, RecipeIds.Count)];
-                    RecipeDataModel? selected = Task.Run(() => RecipeDataBase.GetItemAsync(id)).Result;
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         var navigationParameters = new Dictionary<string, object>
                         {
-                        { "recipeData", selected },
+                        { "recipeId", id },
                         };
-                        await Shell.Current.GoToAsync($"//{nameof(ViewRecipePage)}", true, navigationParameters);
+                        await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
                         navigationParameters.Clear();
                     });
-                } else
+                }
+                else
                     await Application.Current.MainPage.DisplayAlert("Warning", "You have no recipes!", "OK");
             }
             catch (Exception ex)
@@ -137,6 +141,24 @@ namespace Recipes.ViewModels
                 return;
             }
         }
-    }
 
-}
+        private async void TryInternet()
+        {
+            try
+            {
+                HttpClient httpClient = new();
+                using HttpResponseMessage response = await httpClient.GetAsync("https://www.google.com");
+                if (!response.IsSuccessStatusCode)
+                    RecipesData.ForEach(r => r.ImageUrl = "noimage.png");
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Debug.WriteLine(ex);
+#endif
+                return;
+            }
+
+        }
+    }
+}    

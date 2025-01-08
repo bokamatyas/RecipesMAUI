@@ -67,7 +67,7 @@ namespace Recipes.ViewModels
                     {
                         { "recipeData", recipeData },
                     };
-                    await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);
+                    await Shell.Current.GoToAsync($"{nameof(DataControlPage)}", true, navigationParameters);                   
                     navigationParameters.Clear();
                 });
             }
