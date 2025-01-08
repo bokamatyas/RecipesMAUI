@@ -31,8 +31,6 @@ namespace Recipes.ViewModels
             {
                 RecipesData = Task.Run(() => RecipeDataBase.GetAllItemsAsync()).Result.OrderByDescending(r => r.Rating).ToList();
                 RecipeIds = RecipesData.Select(r => r.Id).ToList();
-                if(RecipesData is not null)
-                    TryInternet();
             }
             catch (Exception ex)
             {
@@ -126,6 +124,10 @@ namespace Recipes.ViewModels
                         {
                         { "recipeId", id },
                         };
+                        while (Shell.Current.Navigation.NavigationStack.Count > 1)
+                        {
+                            Shell.Current.Navigation.RemovePage(Shell.Current.Navigation.NavigationStack[1]);
+                        }
                         await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
                         navigationParameters.Clear();
                     });
@@ -140,25 +142,6 @@ namespace Recipes.ViewModels
 #endif
                 return;
             }
-        }
-
-        private async void TryInternet()
-        {
-            try
-            {
-                HttpClient httpClient = new();
-                using HttpResponseMessage response = await httpClient.GetAsync("https://www.google.com");
-                if (!response.IsSuccessStatusCode)
-                    RecipesData.ForEach(r => r.ImageUrl = "noimage.png");
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Debug.WriteLine(ex);
-#endif
-                return;
-            }
-
         }
     }
 }    
