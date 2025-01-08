@@ -7,7 +7,8 @@
              Shell.BackgroundColor="{x:StaticResource Primary}"
              Shell.ForegroundColor="{x:StaticResource White}"
              Shell.TitleColor="{x:StaticResource White}"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{x:StaticResource PageBG}">
     
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource Primary}" StatusBarStyle="LightContent"/>

@@ -12,7 +12,7 @@
     <Color x:Key="Secondary">#2E2532</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#666</Color>
-    <Color x:Key="PageBG">#CCC</Color>
+    <Color x:Key="PageBG">#C8AF55</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
