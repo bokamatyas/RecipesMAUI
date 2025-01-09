@@ -128,7 +128,7 @@ namespace Recipes.ViewModels
                         {
                             Shell.Current.Navigation.RemovePage(Shell.Current.Navigation.NavigationStack[1]);
                         }
-                        await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", true, navigationParameters);
+                        await Shell.Current.GoToAsync($"{nameof(ViewRecipePage)}", false, navigationParameters);
                         navigationParameters.Clear();
                     });
                 }
