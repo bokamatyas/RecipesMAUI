@@ -25,10 +25,7 @@
                 <Style TargetType="Entry">
                     <Setter Property="FontSize" Value="20"/>
                     <Setter Property="BackgroundColor" Value="{x:StaticResource Tertiary}"/>
-                </Style>
-                <Style TargetType="Editor">
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="BackgroundColor" Value="{x:StaticResource Tertiary}"/>
+                    <Setter Property="TextColor" Value="{x:StaticResource White}"/>
                 </Style>
                 <Style TargetType="Border">
                     <Setter Property="Stroke" Value="Black"/>
